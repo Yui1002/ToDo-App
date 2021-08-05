@@ -1,0 +1,36 @@
+.todo-item {
+    width: 50%;
+    background-color: #fff;
+    height: 2em;
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.todo-done {
+    text-decoration: line-through;
+}
+
+.todo-content {
+    flex: 1
+}
+
+.todo-check {
+    height: 100%;
+    width: 2.5em;
+    background-color: #FFD700;
+    border: none;
+    padding: 0;
+    flex: 0.15;
+}
+
+.todo-delete {
+    height: 100%;
+    width: 2.5em;
+    background-color: #00CED1;
+    border: none;
+    padding: 0;
+    flex: 0.15;
+}
+
+
+
