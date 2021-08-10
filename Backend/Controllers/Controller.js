@@ -5,12 +5,22 @@ class Controller {
         this.Models = new Models()
     }
 
-    checkDuplicateItems() {
-
+    async checkDuplicateItems(req) {
+        const res = await this.Models.checkUnique(req)
+        return res
     }
 
     passToDB(req) {
         return this.Models.insertItems(req)
+    }
+
+    getItemsUserDone(req) {
+        return this.Models.getItemsUserDone(req)
+    }
+
+    async getAllItems() {
+        const res = await this.Models.getAllItems()
+        return res
     }
     
 }
