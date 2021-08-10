@@ -37,3 +37,8 @@
     height: 100%;
     border: none;
 }
+
+.todo-error {
+    margin-top: 2em;
+    color: #fff;
+}
