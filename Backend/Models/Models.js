@@ -63,6 +63,18 @@ class Models {
             connection.end()
         }
     }
+
+    async deleteItems() {
+        const connection = await mysql.createConnection(db_setting);
+        try {
+            const sql = 'delete from tasks';
+            const [rows, fields] = await connection.query(sql)
+        } catch(e) {
+            console.log(e)
+        } finally {
+            connection.end()
+        }
+    }
 }
 
 export default Models;

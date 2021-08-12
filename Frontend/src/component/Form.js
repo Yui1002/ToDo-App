@@ -55,6 +55,13 @@ const Form = ({setInput, setTodos, input, todos, setStatus, setIsReload}) => {
         setStatus(e.target.value)
     }
 
+    const deleteItems = async (e) => {
+        setTodos(todos.splice())
+
+        const response = await fetch('http://localhost:5000/deleteItems');
+        const data = await response.json();
+    }
+
     return (
         <div>
             <h1 className="todo-title">Yui's Todo List</h1>
@@ -78,6 +85,7 @@ const Form = ({setInput, setTodos, input, todos, setStatus, setIsReload}) => {
                     </select>
                 </div>
             </div>
+            <button onClick={deleteItems}>Reset</button>
             {error ? <div className="todo-error">This item is already added!</div> : <div></div>}
         </div>
     );

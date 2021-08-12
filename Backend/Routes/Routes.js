@@ -24,6 +24,11 @@ class Routes {
             const result = await this.Controller.getAllItems()
             res.json({result: result})
         })
+
+        app.get('/deleteItems', (req, res) => {
+            this.Controller.deleteItems()
+            res.json({msg: 'All the items are deleted'})
+        })
     }
 }
 

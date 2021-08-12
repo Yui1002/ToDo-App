@@ -22,6 +22,10 @@ class Controller {
         const res = await this.Models.getAllItems()
         return res
     }
+
+    deleteItems() {
+        return this.Models.deleteItems()
+    }
     
 }
 
