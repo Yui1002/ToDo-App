@@ -7,22 +7,8 @@ const App = () => {
   
   const [input, setInput] = useState('');
   const [todos, setTodos] = useState([]);
-  const [status, setStatus] = useState('all')
   const [filteredTodos, setFilteredTodos] = useState([])
-  const [isReload, setIsReload] = useState(false)
-
-  // const getAllItems = async () => {
-  //   const response = await fetch('http://localhost:5000/getAllTodo');
-  //   const data = await response.json()
-
-  //   console.log(data)
-
-  //   for(let i = 0; i < data.result.length; i++) {
-  //     todos.push(data.result[i])
-  //   }
-  //   setTodos(todos)
-  // }
-
+  const [status, setStatus] = useState('all')
 
   useEffect(() => {
     const handleFilter = () => {
@@ -48,15 +34,11 @@ const App = () => {
         input={input}
         todos={todos}
         setStatus={setStatus}
-        setIsReload={setIsReload}
-        />
-      
+      />
       <TodoList 
         todos={todos}
         setTodos={setTodos}
         filteredTodos={filteredTodos}
-        isReload={isReload}
-        setIsReload={setIsReload}
       />
     </div>
   );

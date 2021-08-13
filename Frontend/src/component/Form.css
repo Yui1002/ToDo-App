@@ -16,15 +16,40 @@
 .todo-input {
     width: 60%;
     height: 100%;
-    padding: 0;
     border: none;
+    padding-left: 0.5em;
 }
 
 .todo-submit {
     width: 20%;
     height: 100%;
-    padding: 0;
     border: none;
+    background: #668ad8;
+    color: #fff;
+    border-bottom: solid 4px #627295;
+    font-weight: bold;
+}
+
+.todo-submit:active {
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+    border-bottom: none;
+}
+
+.todo-reset {
+    width: 10%;
+    height: 100%;
+    border: none;
+    background: #fd9535;
+    color: #fff;
+    border-bottom: solid 4px #e97a12;
+    font-weight: bold;
+} 
+
+.todo-reset:active {
+    -webkit-transform: translateY(4px);
+    transform: translateY(4px);
+    border-bottom: none;
 }
 
 .todo-select-container {
@@ -38,7 +63,7 @@
     border: none;
 }
 
-.todo-error {
+.todo-error, .todo-empty {
     margin-top: 2em;
     color: #fff;
 }

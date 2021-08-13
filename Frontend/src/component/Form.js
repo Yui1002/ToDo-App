@@ -1,32 +1,35 @@
 import React, { useState } from 'react';
 import './Form.css'
 
-const Form = ({setInput, setTodos, input, todos, setStatus, setIsReload}) => {
+const Form = ({setInput, setTodos, input, todos, setStatus}) => {
     const [error, setError] = useState(false)
+    const [isEmpty, setIsEmpty] = useState(false)
 
-    // ユーザがinput欄に入力したものを監視
     const handleChange = (e) => {
         setInput(e.target.value)
     }
 
-    // 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if(input === '') {
+            setIsEmpty(true)
+            return
+        }
+
+        setIsEmpty(false)
 
         const userInput = {
             input: input,
             completed: false,
         }
 
-        // ユーザが入力したアイテムが既にデータベースにないかを確認
         const response = await fetch('http://localhost:5000/checkUnique', {
             method: 'POST',
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify(userInput)
         })
         const data = await response.json();
-
-        // ない場合はデータベースに追加
         if(data.result === 0) {
             const response = await fetch('http://localhost:5000/addTodo', {
                 method: 'POST',
@@ -34,28 +37,23 @@ const Form = ({setInput, setTodos, input, todos, setStatus, setIsReload}) => {
                 body: JSON.stringify(userInput)
             })
             const data = await response.json()
-
             setTodos([...todos, {
                 value: userInput.input, completed: userInput.completed
             }])
-            // case1: unique(もう一度確認)
             setError(false)
         } else {
-            // case2: duplicate
             setError(true)
         }
 
-        // input欄をリセット
         setInput('');
         document.getElementById('todo-input').value = "";
     }
 
-    // check status (All/Completed/Uncompleted)
     const handleStatus = (e) => {
         setStatus(e.target.value)
     }
 
-    const deleteItems = async (e) => {
+    const resetItems = async () => {
         setTodos(todos.splice())
 
         const response = await fetch('http://localhost:5000/deleteItems');
@@ -84,9 +82,10 @@ const Form = ({setInput, setTodos, input, todos, setStatus, setIsReload}) => {
                         <option value="uncompleted">Uncompleted</option>
                     </select>
                 </div>
+                <button onClick={resetItems} className="todo-reset">Reset</button>
             </div>
-            <button onClick={deleteItems}>Reset</button>
             {error ? <div className="todo-error">This item is already added!</div> : <div></div>}
+            {isEmpty ? <div className="todo-empty">Please write something</div> : <div></div>}
         </div>
     );
 }
