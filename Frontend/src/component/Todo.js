@@ -8,30 +8,24 @@ const Todos = ({item, setTodos, todos}) => {
         setTodos(result)
     }
 
-    const handleCompleted = (e) => {
+    const handleCompleted = async () => {
         setTodos(
             todos.map((todo) => {
                 if(todo.value === item.value) {
-                    return {
-                        ...todo, completed: 1
-                    }
+                    return { ...todo, completed: 1 }
                 }
                 return todo
             })
         )
 
-        const result = {
-            input: item.value
-        }
-        
-        fetch('http://localhost:3000/chageStatusToDone', {
+        const result = { input: item.value }
+
+        const response = await fetch('http://localhost:3000/chageStatusToDone', {
             method: 'POST',
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify(result)
         })
-        .then(() => {
-            console.log('get done')
-        })
+        const data = response.json()
     }
     return (
         <li key={item.value} 
